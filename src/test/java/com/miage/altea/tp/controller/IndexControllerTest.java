@@ -1,5 +1,6 @@
 package com.miage.altea.game_ui.controller;
 
+import com.miage.altea.game_ui.trainers.TrainerServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ class IndexControllerTest {
 
     @Test
     void index_shouldReturnTheNameOfTheIndexTemplate() {
-        var indexController = new IndexController();
+        var indexController = new IndexController(new TrainerServiceImpl());
         var viewName = indexController.index();
 
         assertEquals("index", viewName);
@@ -33,7 +34,7 @@ class IndexControllerTest {
 
     @Test
     void registerNewTrainer_shouldReturnAModelAndView(){
-        var indexController = new IndexController();
+        var indexController = new IndexController(new TrainerServiceImpl());
         var modelAndView = indexController.registerNewTrainer("Blue");
 
         assertNotNull(modelAndView);

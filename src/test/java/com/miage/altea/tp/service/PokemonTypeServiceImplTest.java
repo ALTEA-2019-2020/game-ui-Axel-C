@@ -62,25 +62,7 @@ public class PokemonTypeServiceImplTest {
         assertEquals("${pokemonType.service.url}", valueAnnotation.value());
     }
 
-    @Test
-    void pokemonNames_shouldBeTranslated_usingLocaleResolver(){
-        var pokemonTypeService = new PokemonTypeServiceImpl();
 
-        var pokemonTypeRepository = mock(PokemonTypeRepository.class);
-        pokemonTypeService.setPokemonTypeRepository(pokemonTypeRepository);
-        when(pokemonTypeRepository.findPokemonTypeById(25)).thenReturn(new PokemonType());
-
-        var translationRepository = mock(TranslationRepository.class);
-        pokemonTypeService.setTranslationRepository(translationRepository);
-        when(translationRepository.getPokemonName(25, Locale.FRENCH)).thenReturn("Pikachu-FRENCH");
-
-        LocaleContextHolder.setLocale(Locale.FRENCH);
-
-        var pikachu = pokemonTypeService.getPokemonType(25);
-
-        assertEquals("Pikachu-FRENCH", pikachu.getName());
-        verify(translationRepository).getPokemonName(25, Locale.FRENCH);
-    }
 
 
 
